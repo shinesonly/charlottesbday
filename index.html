@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Charlotte 🌻</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8E9;
+    --cream-2:#FFF1D0;
+    --sun-yellow:#FFC93C;
+    --sun-gold:#F5A100;
+    --petal-orange:#FF8A3D;
+    --leaf-green:#7FA050;
+    --leaf-green-dark:#587239;
+    --cocoa:#4A3423;
+    --cocoa-soft:#7A5C42;
+    --white-soft:#FFFDF7;
+    --shadow: 0 10px 30px rgba(122, 76, 20, 0.15);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    font-family:'Quicksand', sans-serif;
+    background:var(--cream);
+    color:var(--cocoa);
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Fredoka', sans-serif;
+  }
+
+  ::selection{ background:var(--sun-yellow); color:var(--cocoa); }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  /* ================= INTRO OVERLAY ================= */
+  #intro{
+    position:fixed; inset:0; z-index:999;
+    background:radial-gradient(circle at 50% 40%, #FFE8A3 0%, var(--sun-yellow) 55%, var(--sun-gold) 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+    padding:20px;
+  }
+  #intro.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .intro-sun{
+    width:110px; height:110px;
+    margin-bottom:22px;
+    animation:spin-slow 14s linear infinite;
+  }
+  @keyframes spin-slow{ to{ transform:rotate(360deg); } }
+
+  #intro h1{
+    font-size:clamp(28px, 6vw, 46px);
+    color:var(--cocoa);
+    margin:0 0 10px;
+    font-weight:700;
+  }
+  #intro p{
+    color:var(--cocoa-soft);
+    font-size:18px;
+    margin:0 0 28px;
+    max-width:420px;
+  }
+  #openBtn{
+    font-family:'Fredoka', sans-serif;
+    font-size:18px;
+    font-weight:600;
+    padding:16px 38px;
+    border:none;
+    border-radius:50px;
+    background:var(--cocoa);
+    color:var(--sun-yellow);
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(74,52,35,0.35);
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  #openBtn:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 14px 28px rgba(74,52,35,0.4); }
+  #openBtn:active{ transform:translateY(0) scale(0.98); }
+
+  /* ================= PETALS ================= */
+  .petal-field{
+    position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden;
+  }
+  .petal{
+    position:absolute; top:-40px;
+    font-size:20px;
+    animation:fall linear infinite;
+    opacity:0.85;
+  }
+  @keyframes fall{
+    0%{ transform:translateY(-10vh) rotate(0deg); }
+    100%{ transform:translateY(110vh) rotate(360deg); }
+  }
+
+  /* ================= NAV DOTS ================= */
+  #navDots{
+    position:fixed; right:18px; top:50%; transform:translateY(-50%);
+    z-index:50; display:flex; flex-direction:column; gap:12px;
+  }
+  #navDots a{
+    width:10px; height:10px; border-radius:50%;
+    background:rgba(122,76,20,0.25);
+    display:block; transition:all 0.3s ease;
+  }
+  #navDots a.active{ background:var(--sun-gold); width:14px; height:14px; }
+  @media (max-width:720px){ #navDots{ display:none; } }
+
+  /* ================= SECTION SHELL ================= */
+  section{
+    position:relative;
+    padding:100px 20px;
+    max-width:1000px;
+    margin:0 auto;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-family:'Fredoka', sans-serif;
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--leaf-green-dark);
+    background:#EAF2DC;
+    padding:6px 16px;
+    border-radius:20px;
+    margin-bottom:18px;
+  }
+
+  /* ================= HERO ================= */
+  #hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,201,60,0.35), transparent 55%),
+      radial-gradient(ellipse at 80% 10%, rgba(255,138,61,0.25), transparent 50%),
+      linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+    padding-top:60px;
+  }
+  .hero-badge{
+    font-family:'Fredoka';
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--sun-gold);
+    margin-bottom:14px;
+  }
+  #hero h1{
+    font-size:clamp(40px, 9vw, 88px);
+    line-height:1.02;
+    margin:0;
+    color:var(--cocoa);
+    font-weight:700;
+  }
+  #hero h1 span{
+    display:block;
+    background:linear-gradient(90deg, var(--sun-gold), var(--petal-orange));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-size:clamp(48px, 12vw, 120px);
+  }
+  #hero .burmese-name{
+    font-family:'Fredoka';
+    font-size:clamp(20px,3vw,26px);
+    color:var(--cocoa-soft);
+    margin-top:6px;
+  }
+  #hero .tagline{
+    max-width:520px;
+    margin:26px auto 0;
+    font-size:19px;
+    color:var(--cocoa-soft);
+  }
+  .scroll-cue{
+    margin-top:56px;
+    font-family:'Fredoka';
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--cocoa-soft);
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+  /* big decorative sunflower */
+  .big-sunflower{ width:min(220px, 40vw); margin:8px auto 18px; }
+
+  /* ================= GALLERY ================= */
+  #gallery h2{ text-align:center; font-size:clamp(30px,5vw,44px); margin:0 0 8px; }
+  #gallery .sub{ text-align:center; color:var(--cocoa-soft); margin:0 0 50px; }
+
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+  }
+  @media (max-width:720px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  .photo-frame{
+    background:var(--white-soft);
+    padding:12px 12px 34px;
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    transform:rotate(var(--r,-2deg));
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
+    position:relative;
+  }
+  .photo-frame:nth-child(2n){ --r:2deg; }
+  .photo-frame:nth-child(3n){ --r:-3deg; }
+  .photo-frame:hover{ transform:rotate(0deg) translateY(-6px) scale(1.03); box-shadow:0 18px 34px rgba(122,76,20,0.22); z-index:2; }
+
+  .photo-window{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:4px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#FFE9B0,#FFD27A);
+    position:relative;
+  }
+  .photo-window img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+
+  .photo-caption{
+    font-family:'Caveat', cursive;
+    font-size:20px;
+    text-align:center;
+    margin-top:10px;
+    color:var(--cocoa-soft);
+  }
+
+  /* ================= FACTS ================= */
+  #facts{ padding-top:40px; }
+  .facts-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:40px;
+  }
+  @media (max-width:720px){ .facts-grid{ grid-template-columns:1fr; } }
+  .fact-card{
+    background:var(--white-soft);
+    border-radius:18px;
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    text-align:center;
+    border:2px solid transparent;
+    transition:border-color 0.3s ease, transform 0.3s ease;
+  }
+  .fact-card:hover{ border-color:var(--sun-yellow); transform:translateY(-5px); }
+  .fact-card .icon{ font-size:36px; margin-bottom:12px; display:block; }
+  .fact-card h3{ margin:0 0 8px; font-size:19px; color:var(--cocoa); }
+  .fact-card p{ margin:0; color:var(--cocoa-soft); font-size:15px; line-height:1.5; }
+
+  /* ================= LETTER ================= */
+  #letter{
+    background:linear-gradient(180deg, var(--cream-2), var(--cream));
+  }
+  .letter-card{
+    background:var(--white-soft);
+    border-radius:22px;
+    padding:clamp(28px, 6vw, 60px);
+    box-shadow:var(--shadow);
+    position:relative;
+    border:1px dashed #E8C878;
+  }
+  .letter-card::before{
+    content:"🌻";
+    position:absolute;
+    top:-28px; left:32px;
+    font-size:44px;
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+  }
+  .letter-head{
+    text-align:center;
+    margin-bottom:26px;
+  }
+  .letter-head h2{
+    font-size:clamp(28px,5vw,40px);
+    margin:0 0 6px;
+  }
+  .letter-head .to{
+    font-family:'Caveat', cursive;
+    font-size:26px;
+    color:var(--sun-gold);
+  }
+  .letter-body p{
+    font-size:17px;
+    line-height:1.9;
+    color:var(--cocoa);
+    margin:0 0 20px;
+  }
+  .letter-body p:first-of-type::first-letter{
+    font-family:'Fredoka';
+    font-size:56px;
+    font-weight:700;
+    float:left;
+    line-height:0.8;
+    padding:8px 10px 0 0;
+    color:var(--sun-gold);
+  }
+  .letter-sign{
+    margin-top:36px;
+    text-align:right;
+    font-family:'Caveat', cursive;
+    font-size:30px;
+    color:var(--cocoa);
+  }
+  .letter-sign span{ display:block; font-size:16px; font-family:'Quicksand'; color:var(--cocoa-soft); }
+
+  /* ================= DREAM PATH ================= */
+  #dream h2{ text-align:center; font-size:clamp(30px,5vw,44px); margin-bottom:8px; }
+  #dream .sub{ text-align:center; color:var(--cocoa-soft); margin-bottom:60px; }
+
+  .stem{
+    position:relative;
+    max-width:640px;
+    margin:0 auto;
+    padding-left:34px;
+    border-left:4px solid var(--leaf-green);
+  }
+  .stem-step{
+    position:relative;
+    margin-bottom:52px;
+  }
+  .stem-step:last-child{ margin-bottom:0; }
+  .stem-step::before{
+    content:"";
+    position:absolute;
+    left:-46px; top:2px;
+    width:20px; height:20px;
+    border-radius:50%;
+    background:var(--sun-yellow);
+    border:4px solid var(--white-soft);
+    box-shadow:0 0 0 3px var(--leaf-green);
+  }
+  .stem-step h3{
+    margin:0 0 6px;
+    font-size:20px;
+    color:var(--cocoa);
+    display:flex; align-items:center; gap:10px;
+  }
+  .stem-step p{
+    margin:0;
+    color:var(--cocoa-soft);
+    line-height:1.6;
+  }
+  .stem-step .emoji{ font-size:22px; }
+
+  /* ================= CAKE / INTERACTIVE ================= */
+  #cake{
+    text-align:center;
+    background:radial-gradient(ellipse at 50% 0%, rgba(255,201,60,0.28), transparent 60%);
+  }
+  #cake h2{ font-size:clamp(30px,5vw,44px); margin-bottom:6px; }
+  #cake .sub{ color:var(--cocoa-soft); margin-bottom:10px; }
+  #cake .sub2{ color:var(--cocoa-soft); margin-bottom:44px; font-size:14px; }
+
+  .cake-wrap{ display:flex; justify-content:center; margin-bottom:20px; }
+
+  #wishMsg{
+    min-height:30px;
+    font-family:'Caveat', cursive;
+    font-size:26px;
+    color:var(--sun-gold);
+    transition:opacity 0.4s ease;
+  }
+
+  .confetti-layer{
+    position:fixed; inset:0; pointer-events:none; z-index:200;
+  }
+  .confetti-piece{
+    position:absolute;
+    font-size:22px;
+    animation:confetti-burst 1.6s ease-out forwards;
+  }
+  @keyframes confetti-burst{
+    0%{ transform:translate(0,0) rotate(0); opacity:1; }
+    100%{ transform:translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity:0; }
+  }
+
+  /* ================= FOOTER ================= */
+  footer{
+    text-align:center;
+    padding:70px 20px 90px;
+    background:var(--cocoa);
+    color:#FFE8A3;
+  }
+  footer .fbig{
+    font-family:'Fredoka';
+    font-size:clamp(24px,4vw,34px);
+    margin-bottom:10px;
+  }
+  footer p{ color:#E7CFA6; max-width:420px; margin:0 auto; line-height:1.7; }
+  footer .sign{
+    margin-top:22px;
+    font-family:'Caveat', cursive;
+    font-size:26px;
+    color:#FFC93C;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ INTRO OVERLAY ============ -->
+  <div id="intro">
+    <svg class="intro-sun" viewBox="0 0 100 100">
+      <g>
+        <circle cx="50" cy="50" r="16" fill="#7A5222"/>
+        <g fill="#FFC93C">
+          <ellipse cx="50" cy="14" rx="8" ry="18"/>
+          <ellipse cx="50" cy="86" rx="8" ry="18"/>
+          <ellipse cx="14" cy="50" rx="18" ry="8"/>
+          <ellipse cx="86" cy="50" rx="18" ry="8"/>
+          <ellipse cx="24" cy="24" rx="8" ry="18" transform="rotate(45 24 24)"/>
+          <ellipse cx="76" cy="76" rx="8" ry="18" transform="rotate(45 76 76)"/>
+          <ellipse cx="76" cy="24" rx="8" ry="18" transform="rotate(-45 76 24)"/>
+          <ellipse cx="24" cy="76" rx="8" ry="18" transform="rotate(-45 24 76)"/>
+        </g>
+      </g>
+    </svg>
+    <h1>A little something for<br>Charlotte 🌻</h1>
+    <p>Life is fleeting and fragile; be joyful ☺️, spread your light 🧨, and leave echoes of warmth and kindness wherever you go. ✨️🌷🤍</p>
+    <p>Happy Birthday, Htae Yati Poe. Tap the sunflower to open your surprise.</p>
+    <button id="openBtn">Open my birthday 🎁</button>
+  </div>
+
+  <!-- ============ FALLING PETALS ============ -->
+  <div class="petal-field" id="petalField"></div>
+
+  <!-- ============ SIDE NAV DOTS ============ -->
+  <nav id="navDots">
+    <a href="#hero" class="active"></a>
+    <a href="#gallery"></a>
+    <a href="#facts"></a>
+    <a href="#letter"></a>
+    <a href="#dream"></a>
+    <a href="#cake"></a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero">
+    <div class="hero-badge">22 . 08 — her day 🌞</div>
+    <svg class="big-sunflower" viewBox="0 0 200 200">
+      <g>
+        <circle cx="100" cy="100" r="34" fill="#7A5222"/>
+        <circle cx="100" cy="100" r="34" fill="url(#seedPattern)" opacity="0.35"/>
+        <g fill="#FFC93C">
+          <ellipse cx="100" cy="22" rx="16" ry="38"/>
+          <ellipse cx="100" cy="178" rx="16" ry="38"/>
+          <ellipse cx="22" cy="100" rx="38" ry="16"/>
+          <ellipse cx="178" cy="100" rx="38" ry="16"/>
+          <ellipse cx="45" cy="45" rx="16" ry="38" transform="rotate(45 45 45)"/>
+          <ellipse cx="155" cy="155" rx="16" ry="38" transform="rotate(45 155 155)"/>
+          <ellipse cx="155" cy="45" rx="16" ry="38" transform="rotate(-45 155 45)"/>
+          <ellipse cx="45" cy="155" rx="16" ry="38" transform="rotate(-45 45 155)"/>
+        </g>
+        <g fill="#F5A100" opacity="0.9">
+          <ellipse cx="100" cy="34" rx="9" ry="20"/>
+          <ellipse cx="100" cy="166" rx="9" ry="20"/>
+          <ellipse cx="34" cy="100" rx="20" ry="9"/>
+          <ellipse cx="166" cy="100" rx="20" ry="9"/>
+        </g>
+      </g>
+    </svg>
+    <h1>Happy Birthday<span>Charlotte</span></h1>
+    <div class="burmese-name">ဟေ ရတီ ဖုိး 🌻 always my honeyy!!</div>
+    <p class="tagline">To the kindest heart, the brightest smile, and the little sister who somehow ended up taking care of everyone else. Today is entirely your day.</p>
+    <div class="scroll-cue">scroll down ↓</div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section id="gallery" class="reveal">
+    <span class="eyebrow">Photo album</span>
+    <h2>Moments with your sunflower 🌻</h2>
+    <div class="gallery-grid">
+      <!-- 1: hands making a heart -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/heart.jpg" alt="Our hands making a heart" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">our hands, one heart 🤍</div>
+      </div>
+
+      <!-- 2: sunflower drawing -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/drawing.jpg" alt="A sunflower drawn for Charlotte" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">a sunflower, drawn for her</div>
+      </div>
+
+      <!-- 3: her profile picture (she never shows her face) -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/account.jpg" alt="Charlotte's profile picture" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">the one photo she'll allow 😄</div>
+      </div>
+
+      <!-- 4: cat -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/cat.jpg" alt="Charlotte with her cat" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">cat mom energy 🐱</div>
+      </div>
+
+      <!-- 5: dog -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/dog.jpg" alt="Charlotte with her dog" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      
+        </div>
+        <div class="photo-caption">and dog mom too 🐶</div>
+      </div>
+
+      <!-- 6: parrot -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/parrot.jpg" alt="Charlotte with her parrot" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+         
+        </div>
+        <div class="photo-caption">and a parrot, of course 🦜</div>
+      </div>
+
+      <!-- 7: riding -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/bike.jpg" alt="Charlotte riding" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">fearless on two wheels 🏍️</div>
+      </div>
+
+      <!-- 8: driving -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/drive.jpg" alt="Charlotte driving" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">and behind the wheel too 🚗</div>
+      </div>
+
+      <!-- 9: us together -->
+      <div class="photo-frame">
+        <div class="photo-window">
+          <img src="images/us.jpg" alt="Us together" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          
+        </div>
+        <div class="photo-caption">us, always 🤍</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUICK FACTS ============ -->
+  <section id="facts" class="reveal">
+    <span class="eyebrow">Little things about her</span>
+    <h2 style="text-align:center; font-size:clamp(28px,5vw,40px); margin-bottom:0;">What makes Charlotte, Charlotte</h2>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <span class="icon">🤍</span>
+        <h3>Kind, always</h3>
+        <p>She notices when you're having a hard day before you even say a word — and she shows up anyway.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">✨</span>
+        <h3>Beautiful, inside out</h3>
+        <p>Not just the smile — the way she cares for everyone around her without ever asking for anything back.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🌻</span>
+        <h3>Sunflowers, obviously</h3>
+        <p>Bright, tall, always turning toward the light — honestly the flower picked the right person.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🐾</span>
+        <h3>An entire zoo of her own</h3>
+        <p>A cat, a dog, and a parrot — because if it's soft, loyal, or a little chaotic, she's already adopted it.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🏍️</span>
+        <h3>Fearless rider</h3>
+        <p>Hops on and just goes — no hesitation, all confidence. Honestly a little intimidating in the best way.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🚗</span>
+        <h3>Behind the wheel</h3>
+        <p>Drives like she's been doing it for years. One more thing she's just quietly, effortlessly good at.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🎓</span>
+        <h3>Top of her class</h3>
+        <p>Passed her entrance exam after 9th grade, got into a great school, and earned distinctions in 10th, 11th, and 12th. So proud of her.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🩺</span>
+        <h3>Future doctor</h3>
+        <p>Dreaming of medical school and the white coat, because she's spent her whole life taking care of people.</p>
+      </div>
+      <div class="fact-card">
+        <span class="icon">🇬🇧</span>
+        <h3>UK bound</h3>
+        <p>Working towards a university seat in the UK — the whole world is genuinely too small for her ambition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LETTER ============ -->
+  <section id="letter" class="reveal">
+    <div class="letter-head">
+      <span class="eyebrow">A letter for you</span>
+      <h2>Dear Charlotte,</h2>
+      <div class="to">Htae Yati Poe — my sunflower</div>
+    </div>
+    <div class="letter-card">
+      <div class="letter-body">
+        <p>🎂✨ Happy birthday, wo de xiao meiiiii!!! Charlotte Liora Hayes!! 💫🥹 How are you my lovee!!?! 🥰 I never forgot about you!! 🫶🏻 My first best friend I got online and who became my sister and the one who loves me very close!! 🤍 Never made me feel anything bad about myself!! 🥹🤍 Thank you for the amazingly biggest love you gave me honeyyyy!!! 🫂🤍 I am very glad you came to this world 🌎✨ and literally a gem that's so precious!! 💎🥹 I'd love a date with you anytime my love!! 🤭💕 Your big sis waiting for you to get bigger so we can walk around the world like boss ladies of the globe!! 👯‍♀️🌎👑 Let's rock it!! 🔥✨ Once again, I wish you the best birthday everrr!!! 🎂🎉🥳 I hope you're having a great day celebrating your birthday there in the school with your new friends!! 🏫🎈 Have a great day my love and a great future ahead!!! 🌟🤍 You always have my heart my love! 🤍🫶🏻</p>
+      </div>
+      <div class="letter-sign">
+        With all my love, today and always
+        <span>your best friend & big sister forever, Shine!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DREAM PATH ============ -->
+  <section id="dream" class="reveal">
+    <span class="eyebrow" style="display:block; text-align:center; margin-left:auto; margin-right:auto; width:fit-content;">Her journey, so far and so far to go</span>
+    <h2>The road to Dr. Charlotte 🎓</h2>
+    <p class="sub">A dream this big deserves to be written down.</p>
+    <div class="stem">
+      <div class="stem-step">
+        <h3><span class="emoji">🌱</span> Myanmar, home base</h3>
+        <p>Where it all starts — the girl with the biggest heart in the room, quietly working towards a future no one can hand her.</p>
+      </div>
+      <div class="stem-step">
+        <h3><span class="emoji">📚</span> Late nights, early mornings</h3>
+        <p>Every exam, every application, every "I'm tired but I'm not stopping" — building the foundation one study session at a time.</p>
+      </div>
+      <div class="stem-step">
+        <h3><span class="emoji">✈️</span> The UK, on the horizon</h3>
+        <p>A university acceptance letter with her name on it, and a one-way ticket toward the life she's been imagining.</p>
+      </div>
+      <div class="stem-step">
+        <h3><span class="emoji">🩺</span> Med school days</h3>
+        <p>Long white coats, longer hours, and a determination that was never in question — because she's been practicing patience and care her whole life already.</p>
+      </div>
+      <div class="stem-step">
+        <h3><span class="emoji">🌻</span> Dr. Htae Yati Poe</h3>
+        <p>The version of her that gets to heal people for a living, exactly the way she's already been healing the people around her for free.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAKE / INTERACTIVE WISH ============ -->
+  <section id="cake" class="reveal">
+    <span class="eyebrow">Make a wish</span>
+    <h2>Blow out the candles 🎂</h2>
+    <p class="sub">Tap the cake — let's make this birthday official.</p>
+    <p class="sub2">(sound off, petals on)</p>
+
+    <div class="cake-wrap">
+      <svg id="cakeSvg" width="260" height="240" viewBox="0 0 260 240" style="cursor:pointer;">
+        <!-- plate -->
+        <ellipse cx="130" cy="220" rx="100" ry="12" fill="#F3D9A5"/>
+        <!-- bottom layer -->
+        <rect x="55" y="150" width="150" height="60" rx="10" fill="#FFE29A"/>
+        <rect x="55" y="150" width="150" height="14" rx="7" fill="#FFC93C"/>
+        <!-- top layer -->
+        <rect x="80" y="105" width="100" height="55" rx="10" fill="#FFF3D0"/>
+        <rect x="80" y="105" width="100" height="12" rx="6" fill="#FFE29A"/>
+        <!-- drips -->
+        <circle cx="70" cy="150" r="7" fill="#FF8A3D"/>
+        <circle cx="100" cy="150" r="6" fill="#FF8A3D"/>
+        <circle cx="190" cy="150" r="7" fill="#7FA050"/>
+        <circle cx="160" cy="150" r="6" fill="#7FA050"/>
+        <!-- sunflower decorations -->
+        <g transform="translate(95,180)">
+          <circle r="8" fill="#7A5222"/>
+          <g fill="#FFC93C">
+            <ellipse cx="0" cy="-13" rx="4" ry="9"/>
+            <ellipse cx="0" cy="13" rx="4" ry="9"/>
+            <ellipse cx="-13" cy="0" rx="9" ry="4"/>
+            <ellipse cx="13" cy="0" rx="9" ry="4"/>
+          </g>
+        </g>
+        <g transform="translate(165,180)">
+          <circle r="8" fill="#7A5222"/>
+          <g fill="#FFC93C">
+            <ellipse cx="0" cy="-13" rx="4" ry="9"/>
+            <ellipse cx="0" cy="13" rx="4" ry="9"/>
+            <ellipse cx="-13" cy="0" rx="9" ry="4"/>
+            <ellipse cx="13" cy="0" rx="9" ry="4"/>
+          </g>
+        </g>
+        <!-- candles -->
+        <g id="candles">
+          <g class="candle" data-lit="1">
+            <rect x="100" y="80" width="8" height="26" fill="#FF8A3D"/>
+            <path class="flame" d="M104 80 C100 74 100 68 104 62 C108 68 108 74 104 80 Z" fill="#FFB13C"/>
+          </g>
+          <g class="candle" data-lit="1">
+            <rect x="126" y="75" width="8" height="31" fill="#7FA050"/>
+            <path class="flame" d="M130 75 C126 69 126 63 130 57 C134 63 134 69 130 75 Z" fill="#FFB13C"/>
+          </g>
+          <g class="candle" data-lit="1">
+            <rect x="152" y="80" width="8" height="26" fill="#FFC93C"/>
+            <path class="flame" d="M156 80 C152 74 152 68 156 62 C160 68 160 74 156 80 Z" fill="#FFB13C"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div id="wishMsg"></div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="fbig">🌻 Happy Birthday, Charlotte 🌻</div>
+    <p>Made with love for Htae Yati Poe, on the day the sunflower field got a little brighter. Here's to Myanmar, to medicine, to the UK, and to every single dream in between.</p>
+    <div class="sign">from your best friend, forever your big sibling</div>
+  </footer>
+
+  <script>
+    // ---------- Intro open ----------
+    const intro = document.getElementById('intro');
+    document.getElementById('openBtn').addEventListener('click', () => {
+      intro.classList.add('hidden');
+      burstConfettiAt(window.innerWidth/2, window.innerHeight*0.3, 26);
+    });
+
+    // ---------- Falling petals (ambient) ----------
+    const petalField = document.getElementById('petalField');
+    const petalEmojis = ['🌻','🌼','🍃'];
+    function spawnPetal(){
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+      p.style.left = Math.random()*100 + 'vw';
+      const duration = 9 + Math.random()*10;
+      p.style.animationDuration = duration + 's';
+      p.style.fontSize = (14 + Math.random()*14) + 'px';
+      petalField.appendChild(p);
+      setTimeout(()=> p.remove(), duration*1000);
+    }
+    setInterval(spawnPetal, 900);
+    for(let i=0;i<6;i++) setTimeout(spawnPetal, i*300);
+
+    // ---------- Scroll reveal ----------
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('is-visible'); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el=> io.observe(el));
+
+    // ---------- Nav dot active state ----------
+    const sections = ['hero','gallery','facts','letter','dream','cake'].map(id=>document.getElementById(id));
+    const navLinks = document.querySelectorAll('#navDots a');
+    const navObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const idx = sections.indexOf(entry.target);
+          navLinks.forEach(l=>l.classList.remove('active'));
+          if(navLinks[idx]) navLinks[idx].classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(s=> s && navObserver.observe(s));
+
+    // ---------- Cake / candle blow interaction ----------
+    const cakeSvg = document.getElementById('cakeSvg');
+    const wishMsg = document.getElementById('wishMsg');
+    const wishes = [
+      "🌻 wish sent — may every dream come true",
+      "🩺 to med school and beyond",
+      "🇬🇧 UK, get ready for her",
+      "💛 the kindest heart wins",
+    ];
+    let blown = false;
+    cakeSvg.addEventListener('click', (e)=>{
+      if(blown) return;
+      blown = true;
+      cakeSvg.querySelectorAll('.flame').forEach(f=> f.style.opacity = '0');
+      wishMsg.textContent = wishes[Math.floor(Math.random()*wishes.length)];
+      const rect = cakeSvg.getBoundingClientRect();
+      burstConfettiAt(rect.left + rect.width/2, rect.top + rect.height/2, 34);
+      setTimeout(()=>{
+        blown = false;
+        cakeSvg.querySelectorAll('.flame').forEach(f=> f.style.opacity = '1');
+      }, 2600);
+    });
+
+    // ---------- Confetti burst ----------
+    function burstConfettiAt(x, y, count){
+      const layer = document.createElement('div');
+      layer.className = 'confetti-layer';
+      document.body.appendChild(layer);
+      const emojis = ['🌻','💛','✨','🎉','🌼'];
+      for(let i=0;i<count;i++){
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        piece.style.left = x + 'px';
+        piece.style.top = y + 'px';
+        const angle = Math.random()*Math.PI*2;
+        const dist = 100 + Math.random()*220;
+        piece.style.setProperty('--dx', Math.cos(angle)*dist + 'px');
+        piece.style.setProperty('--dy', Math.sin(angle)*dist - 60 + 'px');
+        piece.style.setProperty('--rot', (Math.random()*720-360) + 'deg');
+        piece.style.animationDuration = (1.2 + Math.random()*0.8) + 's';
+        layer.appendChild(piece);
+      }
+      setTimeout(()=> layer.remove(), 2200);
+    }
+  </script>
+</body>
+</html>
